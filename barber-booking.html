@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>رزرو نوبت آرایشگاه</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef1f4;--card:#fff;--ink:#14202e;--mut:#5d6b7a;--line:#d5dce3;--red:#c8352f;--blue:#1f4e8c;--ok:#1f7a4d;--sel:#e8eef8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e151d;--card:#17212c;--ink:#e8edf2;--mut:#98a6b5;--line:#2a3846;--red:#e5534d;--blue:#6ea0e6;--ok:#4cc58a;--sel:#1d2d44;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e151d;--card:#17212c;--ink:#e8edf2;--mut:#98a6b5;--line:#2a3846;--red:#e5534d;--blue:#6ea0e6;--ok:#4cc58a;--sel:#1d2d44;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Vazirmatn",Tahoma,sans-serif;line-height:1.8}
+.wrap{max-width:640px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:1.5rem;font-weight:800;margin:8px 0 2px}
+.sub{color:var(--mut);margin:0 0 18px;font-size:.95rem}
+.pole{height:12px;border-radius:6px;background:var(--line);overflow:hidden;margin-bottom:10px}
+.pole i{display:block;height:100%;width:25%;transition:width .4s;background:repeating-linear-gradient(-45deg,var(--red) 0 8px,#fff 8px 16px,var(--blue) 16px 24px,#fff 24px 32px);background-size:45px 45px;animation:roll 1.2s linear infinite}
+@keyframes roll{to{background-position:45px 0}}
+@media (prefers-reduced-motion:reduce){.pole i{animation:none}}
+.steps{display:flex;justify-content:space-between;gap:4px;margin-bottom:18px;font-size:.78rem;color:var(--mut)}
+.steps span{flex:1;text-align:center}
+.steps .on{color:var(--ink);font-weight:800}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+h2{font-size:1.15rem;margin:0 0 4px}
+.hint{color:var(--mut);font-size:.9rem;margin:0 0 16px}
+label{display:block;font-weight:600;margin:12px 0 4px;font-size:.92rem}
+input[type=text],input[type=tel],textarea{width:100%;font:inherit;padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink)}
+input:focus,textarea:focus,button:focus-visible,.opt:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.err{color:var(--red);font-size:.85rem;min-height:1.2em;margin-top:2px}
+.opt{display:flex;align-items:center;gap:12px;padding:12px;border:1.5px solid var(--line);border-radius:10px;margin-bottom:10px;cursor:pointer;background:var(--card);width:100%;font:inherit;color:inherit;text-align:right}
+.opt.sel{border-color:var(--blue);background:var(--sel)}
+.opt .t{flex:1}.opt small{display:block;color:var(--mut)}
+.opt b{white-space:nowrap}
+.av{width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:800}
+.chk{width:22px;height:22px;border:2px solid var(--line);border-radius:6px;display:grid;place-items:center;font-size:.8rem;color:#fff}
+.sel .chk{background:var(--blue);border-color:var(--blue)}
+.days,.slots{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:8px 12px;border:1.5px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);font:inherit;cursor:pointer;text-align:center;min-width:64px}
+.chip.sel{border-color:var(--blue);background:var(--blue);color:#fff}
+.chip:disabled{opacity:.4;text-decoration:line-through;cursor:not-allowed}
+.days .chip{line-height:1.4}.days small{display:block;font-size:.75rem;opacity:.8}
+.total{display:flex;justify-content:space-between;font-weight:800;padding:12px 0;border-top:1px dashed var(--line);margin-top:6px}
+.sum{margin:0 0 12px;padding:0;list-style:none}
+.sum li{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--line)}
+.sum span{color:var(--mut)}
+.nav{display:flex;gap:10px;margin-top:18px}
+button.btn{flex:1;font:inherit;font-weight:800;padding:12px;border-radius:10px;border:0;cursor:pointer;background:var(--blue);color:#fff}
+button.btn.sec{background:transparent;color:var(--ink);border:1.5px solid var(--line);flex:.6}
+.done{text-align:center;padding:10px 0}
+.done .ic{width:64px;height:64px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:2rem;margin:0 auto 10px}
+.code{display:inline-block;font-weight:800;letter-spacing:.1em;padding:4px 14px;border:1.5px dashed var(--ok);border-radius:8px;color:var(--ok);direction:ltr}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>رزرو نوبت آرایشگاه</h1>
+  <p class="sub">در چهار گام ساده، نوبت خود را آنلاین ثبت کنید.</p>
+  <div class="pole"><i id="bar"></i></div>
+  <div class="steps" id="steps"></div>
+  <div class="card" id="view"></div>
+</div>
+<script>
+const fa=n=>Number(n).toLocaleString('fa-IR');
+const BARBERS=[{id:1,n:'رضا کاظمی',s:'کوتاهی کلاسیک'},{id:2,n:'آرمان نوری',s:'فید و مدل‌های مدرن'},{id:3,n:'سعید حیدری',s:'اصلاح ریش و پاکسازی صورت'}];
+const SERVICES=[{id:1,n:'کوتاهی مو',m:30,p:150000},{id:2,n:'اصلاح ریش',m:20,p:100000},{id:3,n:'کوتاهی مو و ریش',m:45,p:230000},{id:4,n:'شست‌وشو و براشینگ',m:15,p:80000},{id:5,n:'رنگ مو',m:60,p:400000}];
+const NAMES=['اطلاعات شما','آرایشگر','تاریخ و ساعت','خدمات و تأیید'];
+const st={step:1,name:'',phone:'',notes:'',barber:null,date:null,time:null,svc:[],err:{},done:null};
+const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()+i+1);return d});
+const fmtD=(d,o)=>new Intl.DateTimeFormat('fa-IR-u-ca-persian',o).format(d);
+const times=[];for(let h=10;h<20;h++){times.push(h+':00');times.push(h+':30')}
+const toFa=s=>s.replace(/\d/g,x=>'۰۱۲۳۴۵۶۷۸۹'[x]);
+const booked=(di,t)=>((di*7+t*3+(st.barber||0)*5)%4)===0;
+const total=()=>st.svc.reduce((a,id)=>a+SERVICES.find(s=>s.id===id).p,0);
+const $=id=>document.getElementById(id);
+
+function draw(){
+  $('bar').style.width=(st.done?100:st.step*25)+'%';
+  $('steps').innerHTML=NAMES.map((n,i)=>`<span class="${st.step===i+1&&!st.done?'on':''}">${fa(i+1)}. ${n}</span>`).join('');
+  const v=$('view');
+  if(st.done){
+    const b=BARBERS.find(x=>x.id===st.barber);
+    v.innerHTML=`<div class="done"><div class="ic">✓</div><h2>نوبت شما ثبت شد</h2>
+    <p class="hint">${st.name} عزیز، ${b.n} در تاریخ ${fmtD(days[st.date],{weekday:'long',day:'numeric',month:'long'})} ساعت ${toFa(st.time)} منتظر شماست.</p>
+    <p>کد پیگیری: <span class="code">${st.done}</span></p>
+    <div class="nav"><button class="btn" onclick="reset()">ثبت نوبت جدید</button></div></div>`;return}
+  v.innerHTML=[s1,s2,s3,s4][st.step-1]()+`<div class="nav">${st.step>1?'<button class="btn sec" onclick="go(-1)">مرحله قبل</button>':''}<button class="btn" onclick="${st.step===4?'submit()':'go(1)'}">${st.step===4?'ثبت نهایی نوبت':'مرحله بعد'}</button></div>`;
+}
+function s1(){return `<h2>گام اول: اطلاعات شما</h2><p class="hint">برای ثبت نوبت، نام و شماره تماس خود را وارد کنید.</p>
+<label for="nm">نام و نام خانوادگی</label><input id="nm" type="text" value="${st.name}" oninput="st.name=this.value" autocomplete="name">
+<div class="err">${st.err.name||''}</div>
+<label for="ph">شماره موبایل</label><input id="ph" type="tel" inputmode="numeric" placeholder="۰۹۱۲۱۲۳۴۵۶۷" value="${st.phone}" oninput="st.phone=this.value" autocomplete="tel">
+<div class="err">${st.err.phone||''}</div>`}
+function s2(){return `<h2>گام دوم: انتخاب آرایشگر</h2><p class="hint">آرایشگر مورد نظر خود را انتخاب کنید.</p>`+BARBERS.map(b=>`<button class="opt ${st.barber===b.id?'sel':''}" onclick="st.barber=${b.id};st.time=null;st.err={};draw()"><span class="av">${b.n[0]}</span><span class="t">${b.n}<small>${b.s}</small></span></button>`).join('')+`<div class="err">${st.err.barber||''}</div>`}
+function s3(){
+  const di=st.date;
+  return `<h2>گام سوم: تاریخ و ساعت</h2><p class="hint">ابتدا روز، سپس ساعت خالی را انتخاب کنید. ساعت‌های خط‌خورده پر شده‌اند.</p>
+<div class="days">${days.map((d,i)=>`<button class="chip ${di===i?'sel':''}" onclick="st.date=${i};st.time=null;draw()">${fmtD(d,{weekday:'short'})}<small>${fmtD(d,{day:'numeric',month:'long'})}</small></button>`).join('')}</div>
+${di===null?'':`<label>ساعت‌های موجود</label><div class="slots">${times.map((t,i)=>`<button class="chip ${st.time===t?'sel':''}" ${booked(di,i)?'disabled':''} onclick="st.time='${t}';draw()">${toFa(t)}</button>`).join('')}</div>`}
+<div class="err">${st.err.time||''}</div>`}
+function s4(){
+  const b=BARBERS.find(x=>x.id===st.barber);
+  return `<h2>گام چهارم: خدمات و تأیید</h2><p class="hint">خدمات مورد نظر را انتخاب کنید. تعرفه‌ها به تومان است.</p>`+
+  SERVICES.map(s=>`<button class="opt ${st.svc.includes(s.id)?'sel':''}" onclick="tg(${s.id})"><span class="chk">${st.svc.includes(s.id)?'✓':''}</span><span class="t">${s.n}<small>${fa(s.m)} دقیقه</small></span><b>${fa(s.p)}</b></button>`).join('')+
+  `<div class="err">${st.err.svc||''}</div>
+  <label for="nt">توضیحات (اختیاری)</label><textarea id="nt" rows="2" oninput="st.notes=this.value">${st.notes}</textarea>
+  <div class="total"><span>مجموع تعرفه</span><span>${fa(total())} تومان</span></div>
+  <ul class="sum"><li><span>مشتری</span>${st.name}</li><li><span>آرایشگر</span>${b.n}</li><li><span>زمان نوبت</span>${fmtD(days[st.date],{weekday:'long',day:'numeric',month:'long'})}، ${toFa(st.time)}</li></ul>`}
+function tg(id){st.svc=st.svc.includes(id)?st.svc.filter(x=>x!==id):[...st.svc,id];st.err={};draw()}
+function check(){
+  const e={};
+  if(st.step===1){
+    if(st.name.trim().length<3)e.name='نام و نام خانوادگی را کامل وارد کنید.';
+    const p=st.phone.replace(/[۰-۹]/g,x=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(x));
+    if(!/^09\d{9}$/.test(p))e.phone='شماره موبایل باید ۱۱ رقم و با ۰۹ شروع شود.';
+  }
+  if(st.step===2&&!st.barber)e.barber='یک آرایشگر انتخاب کنید.';
+  if(st.step===3&&(st.date===null||!st.time))e.time='روز و ساعت نوبت را انتخاب کنید.';
+  if(st.step===4&&!st.svc.length)e.svc='حداقل یک خدمت انتخاب کنید.';
+  st.err=e;return !Object.keys(e).length;
+}
+function go(n){if(n>0&&!check()){draw();return}st.err={};st.step+=n;draw();window.scrollTo(0,0)}
+function submit(){if(!check()){draw();return}st.done='BR-'+Math.floor(10000+Math.random()*89999);draw();window.scrollTo(0,0)}
+function reset(){Object.assign(st,{step:1,name:'',phone:'',notes:'',barber:null,date:null,time:null,svc:[],err:{},done:null});draw()}
+draw();
+</script>
+</body>
+</html>
